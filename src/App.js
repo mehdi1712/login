@@ -1,12 +1,17 @@
 import React from "react"
 import { Container } from "react-bootstrap"
 import "./App.css"
-import Form from "./components/FormComponent"
+import { Route, Switch } from "react-router-dom"
+import Routes from "./Routes"
 
 function App() {
    return (
       <Container>
-         <Form />
+         <Switch>
+            {Routes.map((route) => (
+               <Route {...route} />
+            ))}
+         </Switch>
       </Container>
    )
 }
