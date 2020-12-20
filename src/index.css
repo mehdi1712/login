@@ -1,13 +1,35 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+   margin: 0;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   background-image: url(./background.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+a {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   text-decoration: none;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.page-content.entry-content pre {
+   white-space: normal;
+}
+* {
+   text-align: center;
+   font-family: "IranSans", sans-serif !important;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+   font-family: "IranSans";
+   font-weight: 300;
+   font-style: normal;
+   src: url("asset/fonts/eot/IRANSansWeb.eot"), url("asset/fonts/woff/IRANSansWeb.woff") format("woff"),
+      url("asset/fonts/ttf/IRANSansWeb.ttf") format("truetype"), url("asset/fonts/iransans.ttf") format("truetype");
 }
