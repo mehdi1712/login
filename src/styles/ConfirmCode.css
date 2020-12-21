@@ -27,7 +27,7 @@
    background-color: #1890ff;
    width: 10rem;
    height: 2rem;
-   margin-top: 6rem;
+   margin-top: 4rem;
 }
 .btn:hover {
    cursor: pointer;
@@ -42,4 +42,10 @@
 .error {
    color: red;
    text-align: left;
+}
+.sign-up {
+   color: blue;
+}
+.sign-up:hover {
+   cursor: pointer;
 }

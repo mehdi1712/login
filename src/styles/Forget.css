@@ -1,0 +1,51 @@
+.root-form {
+   padding: 2rem;
+   border-radius: 10px;
+   background-color: white;
+   height: 21rem;
+   width: 15rem;
+}
+.card-header {
+   margin-bottom: 1rem;
+}
+.card-body {
+   margin-top: 5rem;
+}
+.form-group {
+   display: flex;
+   justify-content: space-between;
+   direction: rtl;
+}
+.form-control:focus {
+   outline-color: #1890ff;
+}
+
+.btn2 {
+   color: white;
+   border-radius: 5rem;
+   border: none;
+   background-color: #1890ff;
+   width: 10rem;
+   height: 2rem;
+   margin-top: 4rem;
+}
+.btn:hover {
+   cursor: pointer;
+   background-color: #67a6e0;
+}
+.btn:focus {
+   outline: #33506b;
+}
+.solid {
+   border-top: 1px solid #bbb;
+}
+.error {
+   color: red;
+   text-align: left;
+}
+.sign-up {
+   color: blue;
+}
+.sign-up:hover {
+   cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import "../styles/LoginForm.css"
+import "../styles/Forget.css"
 import { Form, Button, Card } from "react-bootstrap"
 import AuthService from "../api/index"
 import { useHistory } from "react-router-dom"
@@ -9,33 +9,38 @@ const FormComponent = (props) => {
    const [success, setSuccess] = useState(true)
    const [loading, setLoading] = useState(false)
    const history = useHistory()
+   const registered = localStorage.getItem("registered")
+
+   var result
 
    localStorage.setItem("registered", "0")
    const onChangeUsername = (e) => {
       const username = e.target.value
       setUsername(username)
    }
-   const handleRegister = () => {
-      history.push("/register")
-   }
-   const handleLogin = (e) => {
+
+   const handleClick = (e) => {
       e.preventDefault()
       setLoading(true)
       if (username) {
-         AuthService.login(username).then(
-            () => {
+         AuthService.forget(username).then(
+            (response) => {
+               result = response.data
+
                setSuccess(true)
-               localStorage.setItem("registered", "1")
+               setLoading(false)
                localStorage.setItem("username", username)
-               history.push("/auth")
+               console.log(result.code)
+               history.push({
+                  pathname: "/confirm-code",
+                  recivedCode: result.code,
+               })
             },
             (error) => {
                // const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
 
                setLoading(false)
                setSuccess(false)
-               localStorage.setItem("registered", "0")
-               history.push("/")
             }
          )
       } else {
@@ -46,7 +51,7 @@ const FormComponent = (props) => {
 
    return (
       <Card className="root-form">
-         <Card.Header>ورود</Card.Header>
+         <Card.Header>فراموشی</Card.Header>
          <hr class="solid" />
          <Card.Body>
             <Form>
@@ -54,17 +59,12 @@ const FormComponent = (props) => {
                   <Form.Label>نام کاربری</Form.Label>
                   <Form.Control value={username} onChange={onChangeUsername} type="text" />
                </Form.Group>
-
                <div style={{ marginTop: "1rem" }}>
                   {!username && <Form.Text className="error">نام کاربری الزامی است</Form.Text>}
                   <br />
-                  <br />
-                  <span onClick={handleRegister} className="sign-up">
-                     ساخت حساب کاربری
-                  </span>
                </div>
 
-               <Button className="btn1" onClick={handleLogin} variant="outline-primary">
+               <Button className="btn1" onClick={handleClick} variant="outline-primary">
                   ادامه
                </Button>
             </Form>
