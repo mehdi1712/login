@@ -3,7 +3,7 @@ import axios from "axios"
 const API_URL = "http://api.behzee.com/general/v1"
 const app = "pros"
 
-const login = (username) => {
+const checkUsername = (username) => {
    return axios
       .post(API_URL + "/users/check", {
          username,
@@ -11,6 +11,7 @@ const login = (username) => {
       })
       .then((response) => {
          if (response.data) {
+            console.log(response.data)
          }
 
          return response.data
@@ -41,23 +42,24 @@ const verifyLogin = (password) => {
       })
       .then((response) => {
          if (response.data) {
-            // localStorage.setItem("user", JSON.stringify(response.data));
-            //  console.log(response.data)
+            //token get back
+            // console.log(response.data)
          }
 
          return response.data
       })
 }
-const forget = (username) => {
+
+const sendCode = (username) => {
    const send_code = "1"
    return axios
       .post(API_URL + "/users/send_code", {
          username,
          send_code,
+         app,
       })
       .then((response) => {
          if (response.data) {
-            // localStorage.setItem("user", JSON.stringify(response.data));
             console.log(response.data)
          }
 
@@ -66,12 +68,12 @@ const forget = (username) => {
 }
 
 // const logout = () => {
-//    localStorage.removeItem("user")
+//    localStorage.removeItem("")
 // }
 
 export default {
-   login,
+   checkUsername,
    getLanguage,
    verifyLogin,
-   forget,
+   sendCode,
 }

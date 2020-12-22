@@ -1,0 +1,20 @@
+.root-form-register {
+   padding: 2rem;
+   border-radius: 10px;
+   background-color: white;
+   height: 25rem;
+   width: 15rem;
+}
+
+.card-body {
+   margin-top: 2rem;
+}
+.btn-reg {
+   color: white;
+   border-radius: 5rem;
+   border: none;
+   background-color: #1890ff;
+   width: 10rem;
+   height: 2rem;
+   margin-top: 1rem !important;
+}

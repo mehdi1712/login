@@ -3,23 +3,26 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import "../styles/Profile.css"
 import { useHistory } from "react-router-dom"
-import { useSetToken } from "../context/TokenProvider"
 
 const Profile = () => {
-   const setToken = useSetToken()
    // const token = useToken()
    const history = useHistory()
    const username = localStorage.getItem("username")
-   const registered = localStorage.getItem("registered")
-   if (registered === "0") {
-      history.push("/")
+   //const registered = localStorage.getItem("registered")
+   const access_token = localStorage.getItem("access_token")
+
+   if (access_token === null || access_token === "") {
+      history.push("/login")
    }
+
    const handleLogout = () => {
       localStorage.setItem("username", "")
-      localStorage.setItem("registered", "0")
+      localStorage.setItem("registered", "")
       localStorage.setItem("language_id", "")
-      setToken({})
-      history.push("/")
+      localStorage.removeItem("access_token")
+      localStorage.removeItem("expires_in")
+      localStorage.removeItem("refresh_token")
+      history.push("/login")
    }
    // console.log("token is " + token)
    return (

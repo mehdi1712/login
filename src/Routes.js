@@ -10,14 +10,14 @@ const Routes = [
    {
       exact: true,
       path: "/",
-      component: Login,
+      component: Profile,
    },
    {
       path: "/login",
       component: Login,
    },
    {
-      path: "/auth",
+      path: "/verify",
       component: VerifyUsername,
    },
    {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "../styles/ConfirmCode.css"
 import { Form, Button, Card } from "react-bootstrap"
 import { useHistory } from "react-router-dom"

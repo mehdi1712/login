@@ -1,74 +1,58 @@
 import React, { useState } from "react"
-import "../styles/LoginForm.css"
+import "../styles/Register.css"
 import { Form, Button, Card } from "react-bootstrap"
-// import AuthService from "../api/index"
+import AuthService from "../api/index"
 import { useHistory } from "react-router-dom"
 
 const Register = () => {
-   const [username, setUsername] = useState("")
-   const [password, setPassword] = useState("")
-   // const [success, setSuccess] = useState(true)
+   const [code, setCode] = useState("")
    const [loading, setLoading] = useState(false)
-   // const history = useHistory()
+   const history = useHistory()
 
-   const onChangeUsername = (e) => {
-      const username = e.target.value
-      setUsername(username)
+   const onChangeCode = (e) => {
+      const code = e.target.value
+      setCode(code)
    }
-   const onChangePassword = (e) => {
-      const password = e.target.value
-      setPassword(password)
-   }
+
    const handleRegister = () => {
-      if (username && password) {
-         //     AuthService.login(username).then(
-         //        () => {
-         //           setSuccess(true)
-         //           localStorage.setItem("registered", "1")
-         //           localStorage.setItem("username", username)
-         //           history.push("/auth")
-         //        },
-         //        (error) => {
-         //           // const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-         //           setLoading(false)
-         //           setSuccess(false)
-         //           localStorage.setItem("registered", "0")
-         //           history.push("/")
-         //        }
-         //     )
-         //  } else {
-         //     console.log("username & pass empty")
-         //     setLoading(false)
+      if (code === localStorage.getItem("code")) {
+         console.log("code correct")
+         AuthService.verifyLogin(code).then(
+            (response) => {
+               localStorage.setItem("access_token", response.data.access_token)
+               localStorage.setItem("expires_in", response.data.expires_in)
+               localStorage.setItem("refresh_token", response.data.refresh_token)
+               history.push("/profile")
+            },
+            (error) => {
+               console.log("expired code ")
+               // const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+               setLoading(false)
+            }
+         )
+      } else {
+         console.log("code is empty or not correct")
+         setLoading(false)
       }
    }
    return (
-      <Card className="root-form">
-         <Card.Header>ثبت نام</Card.Header>
+      <Card className="root-form-register">
+         <Card.Header>تایید کد</Card.Header>
          <hr class="solid" />
          <Card.Body>
             <Form>
                <Form.Group>
-                  <Form.Label>نام کاربری</Form.Label>
-                  <Form.Control value={username} onChange={onChangeUsername} type="text" />
+                  <Form.Label>کد </Form.Label>
+                  <Form.Control value={code} onChange={onChangeCode} type="text" />
                </Form.Group>
 
                <div style={{ marginTop: "1rem" }}>
-                  {!username && <Form.Text className="error">نام کاربری الزامی است</Form.Text>}
+                  {!code && <Form.Text className="error">کد الزامی است</Form.Text>}
                   <br />
-                  <br />
-               </div>
-               <Form.Group>
-                  <Form.Label>رمز عبور</Form.Label>
-                  <Form.Control value={username} onChange={onChangePassword} type="text" />
-               </Form.Group>
-
-               <div style={{ marginTop: "1rem" }}>
-                  {!username && <Form.Text className="error">رمز عبور الزامی است</Form.Text>}
-                  <br />
+                  <span> کد و پسورد : {localStorage.getItem("code")}</span>
                   <br />
                </div>
-
-               <Button className="btn" onClick={handleRegister} variant="outline-primary">
+               <Button className="btn-reg" onClick={handleRegister} variant="outline-primary">
                   ثبت نام
                </Button>
             </Form>

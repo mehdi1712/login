@@ -27,7 +27,7 @@
    background-color: #1890ff;
    width: 10rem;
    height: 2rem;
-   margin-top: 4rem;
+   margin-top: 2rem;
 }
 .btn:hover {
    cursor: pointer;
@@ -48,5 +48,4 @@
 }
 .forget-pass:hover {
    cursor: pointer;
-   
 }

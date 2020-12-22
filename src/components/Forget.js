@@ -6,10 +6,8 @@ import { useHistory } from "react-router-dom"
 
 const FormComponent = (props) => {
    const [username, setUsername] = useState("")
-   const [success, setSuccess] = useState(true)
    const [loading, setLoading] = useState(false)
    const history = useHistory()
-   const registered = localStorage.getItem("registered")
 
    var result
 
@@ -23,24 +21,22 @@ const FormComponent = (props) => {
       e.preventDefault()
       setLoading(true)
       if (username) {
-         AuthService.forget(username).then(
+         AuthService.sendCode(username).then(
             (response) => {
                result = response.data
 
-               setSuccess(true)
                setLoading(false)
                localStorage.setItem("username", username)
                console.log(result.code)
-               history.push({
-                  pathname: "/confirm-code",
-                  recivedCode: result.code,
-               })
+               // history.push({
+               //    pathname: "/confirm-code",
+               //    recivedCode: result.code,
+               // })
             },
             (error) => {
                // const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
 
                setLoading(false)
-               setSuccess(false)
             }
          )
       } else {
@@ -71,7 +67,6 @@ const FormComponent = (props) => {
          </Card.Body>
          {loading && <span>در حال بارگذاری...</span>}
          <br />
-         {!success && <span style={{ color: "red", marginBottom: "1rem" }}>یافت نشد</span>}
       </Card>
    )
 }

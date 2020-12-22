@@ -3,25 +3,22 @@ import "../styles/VerifyUsername.css"
 import { Form, Button, Card } from "react-bootstrap"
 import AuthService from "../api/index"
 import { useHistory } from "react-router-dom"
-import { useSetToken } from "../context/TokenProvider"
 
 const VerifyUsername = (props) => {
-   const setToken = useSetToken()
    const [password, setPassword] = useState("")
    const [language, setLanguage] = useState([])
    const [success, setSuccess] = useState(true)
    const [loading, setLoading] = useState(false)
    const history = useHistory()
-   const registered = localStorage.getItem("registered")
-   if (registered === 0) {
-      history.push("/")
-   }
-   localStorage.setItem("language_id", "1")
-   var result = []
 
-   useEffect(async () => {
-      result = await AuthService.getLanguage()
-      setLanguage(result.data)
+   localStorage.setItem("language_id", "1")
+
+   useEffect(() => {
+      async function fetchLanguages() {
+         const result = await AuthService.getLanguage()
+         setLanguage(result.data)
+      }
+      fetchLanguages()
    }, [])
    const onChangePassword = (e) => {
       const password = e.target.value
@@ -29,7 +26,7 @@ const VerifyUsername = (props) => {
    }
    const onChangeLanguage = (e) => {
       const ln = e.target.value
-      localStorage.setItem("language_id", ln == "fa" ? "1" : "0")
+      localStorage.setItem("language_id", ln === "fa" ? "1" : "0")
    }
    const handleForget = () => {
       history.push("/forget")
@@ -41,10 +38,11 @@ const VerifyUsername = (props) => {
       if (password) {
          AuthService.verifyLogin(password).then(
             (response) => {
-               // history.push("/auth")
                setSuccess(true)
                setLoading(false)
-               setToken(response.data)
+               localStorage.setItem("access_token", response.data.access_token)
+               localStorage.setItem("expires_in", response.data.expires_in)
+               localStorage.setItem("refresh_token", response.data.refresh_token)
                history.push("/profile")
             },
             (error) => {
@@ -58,9 +56,6 @@ const VerifyUsername = (props) => {
       }
    }
 
-   if (localStorage.getItem("registered") === "0") {
-      history.push("/")
-   }
    return (
       <Card className="root-form">
          <Card.Header>احراز هویت</Card.Header>
@@ -97,4 +92,3 @@ const VerifyUsername = (props) => {
    )
 }
 export default VerifyUsername
-//09100046370
