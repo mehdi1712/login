@@ -17,7 +17,9 @@ const ConfirmCode = (props) => {
       setCode(code)
    }
    const handleConfirm = () => {
+      setLoading(true)
       if (code === recivedCode) {
+         setLoading(false)
          history.push("/auth")
       }
    }

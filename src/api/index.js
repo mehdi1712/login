@@ -30,15 +30,15 @@ const getLanguage = () => {
 
 const verifyLogin = (password) => {
    const username = localStorage.getItem("username")
-   const registered = localStorage.getItem("registered")
    const language_id = localStorage.getItem("language_id")
+   const registered = localStorage.getItem("registered")
    return axios
       .post(API_URL + "/users/verify", {
          password,
          app,
          username,
-         registered,
          language_id,
+         registered,
       })
       .then((response) => {
          if (response.data) {
@@ -67,6 +67,50 @@ const sendCode = (username) => {
       })
 }
 
+const verifyForget = (password) => {
+   const username = localStorage.getItem("username")
+
+   return axios
+      .post(API_URL + "/users/verify_code", {
+         password,
+         app,
+         username,
+      })
+      .then((response) => {
+         if (response.data) {
+            //token get back
+            // console.log(response.data)
+         }
+
+         return response.data
+      })
+}
+const refreshToken = () => {
+   const refresh_token = localStorage.getItem("refresh_token")
+   const access_token = localStorage.getItem("access_token")
+
+   return axios
+      .post(
+         API_URL + "/users/refresh",
+         {
+            refresh_token,
+         },
+         {
+            headers: {
+               Authorization: `Bearer ${access_token}`,
+            },
+         }
+      )
+      .then((response) => {
+         if (response.data) {
+            //token get back
+            // console.log(response.data)
+         }
+
+         return response.data
+      })
+}
+
 // const logout = () => {
 //    localStorage.removeItem("")
 // }
@@ -76,4 +120,6 @@ export default {
    getLanguage,
    verifyLogin,
    sendCode,
+   verifyForget,
+   refreshToken,
 }

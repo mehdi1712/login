@@ -16,12 +16,7 @@ const Profile = () => {
    }
 
    const handleLogout = () => {
-      localStorage.setItem("username", "")
-      localStorage.setItem("registered", "")
-      localStorage.setItem("language_id", "")
-      localStorage.removeItem("access_token")
-      localStorage.removeItem("expires_in")
-      localStorage.removeItem("refresh_token")
+      localStorage.clear()
       history.push("/login")
    }
    // console.log("token is " + token)

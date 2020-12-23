@@ -24,10 +24,16 @@ const FormComponent = (props) => {
          AuthService.sendCode(username).then(
             (response) => {
                result = response.data
-
                setLoading(false)
-               localStorage.setItem("username", username)
-               console.log(result.code)
+               if (result.registered === true) {
+                  localStorage.setItem("code", result.code)
+                  localStorage.setItem("registered", "1")
+                  history.push("/forget-verify")
+               } else {
+                  console.log("not user")
+                  localStorage.setItem("registered", "0")
+                  history.push("/login")
+               }
                // history.push({
                //    pathname: "/confirm-code",
                //    recivedCode: result.code,

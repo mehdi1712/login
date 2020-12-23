@@ -4,7 +4,7 @@ import { Form, Button, Card } from "react-bootstrap"
 import AuthService from "../api/index"
 import { useHistory } from "react-router-dom"
 
-const Register = () => {
+const ForgetVerify = () => {
    const [code, setCode] = useState("")
    const [loading, setLoading] = useState(false)
    const history = useHistory()
@@ -14,12 +14,10 @@ const Register = () => {
       setCode(code)
    }
 
-   const handleRegister = () => {
-      localStorage.setItem("registered", "0")
-      localStorage.setItem("language_id", "1")
+   const handleClick = () => {
       if (code === localStorage.getItem("code")) {
          console.log("code correct")
-         AuthService.verifyLogin(code).then(
+         AuthService.verifyForget(code).then(
             (response) => {
                localStorage.setItem("access_token", response.data.access_token)
                localStorage.setItem("expires_in", response.data.expires_in)
@@ -56,7 +54,7 @@ const Register = () => {
                   <span> کد و پسورد : {localStorage.getItem("code")}</span>
                   <br />
                </div>
-               <Button className="btn-reg" onClick={handleRegister} variant="outline-primary">
+               <Button className="btn-reg" onClick={handleClick} variant="outline-primary">
                   ثبت نام
                </Button>
             </Form>
@@ -65,4 +63,4 @@ const Register = () => {
       </Card>
    )
 }
-export default Register
+export default ForgetVerify

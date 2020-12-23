@@ -4,6 +4,7 @@ import Forget from "./components/Forget"
 import Profile from "./components/Profile"
 import ConfirmCode from "./components/ConfirmCode"
 import Register from "./components/Register"
+import ForgetVerify from "./components/ForgetVerify"
 import NotFound from "./pages/NotFound"
 
 const Routes = [
@@ -35,6 +36,10 @@ const Routes = [
    {
       path: "/confirm-code",
       component: ConfirmCode,
+   },
+   {
+      path: "/forget-verify",
+      component: ForgetVerify,
    },
 
    {

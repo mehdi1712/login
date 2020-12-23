@@ -43,6 +43,8 @@ const VerifyUsername = (props) => {
                localStorage.setItem("access_token", response.data.access_token)
                localStorage.setItem("expires_in", response.data.expires_in)
                localStorage.setItem("refresh_token", response.data.refresh_token)
+               var now = new Date()
+               localStorage.setItem("login_time", now.getTime())
                history.push("/profile")
             },
             (error) => {
